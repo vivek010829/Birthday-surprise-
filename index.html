@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffd6e8, #ffe6f0, #fff0f5);
+      overflow: hidden;
+    }
+    audio { display: none; }
+    .cake {
+      width: 150px;
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -20px); }
+    }
+    .balloons {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.imgur.com/3zqQ6wK.gif') repeat-x;
+      opacity: 0.3;
+      z-index: 0;
+    }
+    .slideshow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+    .photo {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #ff69b4;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .caption {
+      margin-top: 10px;
+      font-size: 1.2em;
+      color: #cc0066;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .letter-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 240, 245, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 10s;
+    }
+    .letter-box {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 600px;
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.5);
+      text-align: center;
+      color: #880044;
+      font-size: 1.2em;
+    }
+    .surprise {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 20px;
+      background: #ff1493;
+      color: white;
+      cursor: pointer;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+  <div class="balloons"></div>
+  <img src="cake.gif" class="cake" alt="cake" />
+  <div class="slideshow">
+    <img id="photo" class="photo" src="" alt="photo"/>
+    <div id="caption" class="caption">Caption</div>
+  </div>
+  <div class="letter-overlay">
+    <div class="letter-box">
+      <p>
+        Happy Birthday to the most special person in my life. I don’t think words will ever be enough to express what you truly mean to me, but I hope this little effort brings a smile to your face. You are not just important to me — you are everything. Your presence lights up even my darkest days, and knowing you exist in my world makes everything feel right. This small gesture is just a glimpse of how much you mean to me… and honestly, this is the bare minimum I could do for someone who deserves the entire world. You’re precious, irreplaceable, and I’m grateful for you every single day.
+      </p>
+      <button class="surprise" onclick="location.href='surprise.html'">Click for Surprise</button>
+    </div>
+  </div>
+  <script>
+    const photos = [
+      { src: 'photo1.jpg', caption: "Your smile makes my world glow 🌸" },
+      { src: 'photo2.jpg', caption: "Every moment with you feels magical ✨" },
+      { src: 'photo3.jpg', caption: "You're the reason behind my happiest days 💖" }
+    ];
+    let i = 0;
+    const img = document.getElementById('photo');
+    const cap = document.getElementById('caption');
+    function showNext() {
+      img.style.opacity = 0;
+      cap.style.opacity = 0;
+      setTimeout(() => {
+        img.src = photos[i].src;
+        cap.textContent = photos[i].caption;
+        img.style.opacity = 1;
+        cap.style.opacity = 1;
+        i++;
+        if (i < photos.length) {
+          setTimeout(showNext, 3000);
+        }
+      }, 500);
+    }
+    setTimeout(showNext, 1000);
+  </script>
+</body>
+</html>
