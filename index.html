@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #ffebf2;
+      overflow: hidden;
+    }
+    audio { display: none; }
+    .cake {
+      width: 150px;
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -20px); }
+    }
+    .slideshow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .photo {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #ff69b4;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .caption {
+      margin-top: 10px;
+      font-size: 1.2em;
+      color: #cc0066;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .letter {
+      position: absolute;
+      bottom: -100%;
+      width: 100%;
+      background: #fff0f5;
+      padding: 30px;
+      text-align: center;
+      font-size: 1.2em;
+      color: #880044;
+      animation: slideUp 2s ease forwards;
+      animation-delay: 10s;
+    }
+    @keyframes slideUp {
+      to { bottom: 0; }
+    }
+    .surprise {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 20px;
+      background: #ff1493;
+      color: white;
+      cursor: pointer;
+      animation: fadeIn 2s ease-in-out;
+      animation-delay: 13s;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+  <img src="cake.gif" class="cake" alt="cake" />
+  <div class="slideshow">
+    <img id="photo" class="photo" src="" alt="photo"/>
+    <div id="caption" class="caption">Caption</div>
+  </div>
+  <div class="letter">
+    <p>
+      Hey...<br><br>
+      From silly jokes to deep conversations, we’ve shared moments that I’ll treasure forever. Today, I wanted to do something a little different… something from my heart.<br><br>
+      You’re not just someone I care about — you’re someone who makes my life brighter just by being in it. Maybe this isn’t perfect, but it’s real — and it’s all for you.<br><br>
+      Happy Birthday. 💖<br>
+    </p>
+    <button class="surprise" onclick="location.href='surprise.html'">Click for Surprise</button>
+  </div>
+  <script>
+    const photos = [
+      { src: 'photo1.jpg', caption: "You're a whole vibe 🌸" },
+      { src: 'photo2.jpg', caption: "My favorite smile in the world 😊" },
+      { src: 'photo3.jpg', caption: "Everything's better with you 💫" }
+    ];
+    let i = 0;
+    const img = document.getElementById('photo');
+    const cap = document.getElementById('caption');
+    function showNext() {
+      img.style.opacity = 0;
+      cap.style.opacity = 0;
+      setTimeout(() => {
+        img.src = photos[i].src;
+        cap.textContent = photos[i].caption;
+        img.style.opacity = 1;
+        cap.style.opacity = 1;
+        i++;
+        if (i < photos.length) {
+          setTimeout(showNext, 3000);
+        }
+      }, 500);
+    }
+    setTimeout(showNext, 1000);
+  </script>
+</body>
+</html>
